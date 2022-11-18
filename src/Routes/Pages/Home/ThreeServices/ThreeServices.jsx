@@ -35,14 +35,14 @@ const ThreeServices = () => {
         <Typography
           as="h2"
           variant="h5"
-          color="primary.main"
+          color="primary"
           sx={{
             fontWeight: "500",
           }}
         >
           OUR SERVICES
         </Typography>
-        <Typography variant="h4" color="accent.main">
+        <Typography variant="h4" color="accent">
           Services We Provide
         </Typography>
       </Box>
@@ -81,7 +81,7 @@ const ThreeServices = () => {
             />
             <Box
               sx={{
-                color: "accent.main",
+                color: "accent",
                 padding: "15px",
               }}
             >

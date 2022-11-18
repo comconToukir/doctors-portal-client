@@ -40,8 +40,6 @@ const ThreeIcons = () => {
           item
           xs={12}
           md={4}
-          color="primary"
-          variant="primary"
           padding="25px"
           sx={{
             display: "flex",

@@ -13,7 +13,7 @@ const Banner = () => {
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
-          color: "accent.main",
+          color: "accent",
         }}
       >
         <Box padding="20px">

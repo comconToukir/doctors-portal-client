@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -11,10 +11,9 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import AdbIcon from "@mui/icons-material/Adb";
 
-import { Link, NavLink } from "react-router-dom";
-import { PatternSharp } from "@mui/icons-material";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import { UserContext } from "./../../contexts/UserContext";
 
 const pages = [
   {
@@ -37,14 +36,19 @@ const pages = [
     path: "contact-us",
     title: "Contact Us",
   },
-  {
-    path: "login",
-    title: "Login",
-  },
 ];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
-function HeaderNav() {
+const HeaderNav = ({ handleDrawerToggle }) => {
+  const { user, logOutUser } = useContext(UserContext);
+  const navigate = useNavigate();
+
+  const settings = [
+    { value: "Profile", link: null, handler: null },
+    { value: "Account", link: null, handler: null },
+    { value: "Dashboard", link: "/dashboard", handler: null },
+    { value: "Logout", link: null, handler: logOutUser },
+  ];
+
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
 
@@ -60,36 +64,43 @@ function HeaderNav() {
     setAnchorElNav(null);
   };
 
-  const handleCloseUserMenu = () => {
+  const handleCloseUserMenu = (handler, link) => {
+    if (typeof handler === "function") {
+      handler();
+    }
+    if (link) {
+      navigate(link);
+    }
     setAnchorElUser(null);
   };
 
   return (
-    <AppBar position="static" >
+    <AppBar
+      position="fixed"
+      style={{
+        backgroundColor: "white",
+        boxShadow: "none",
+        zIndex: "9999",
+      }}
+    >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Typography
-            variant="h6"
+            variant="h5"
             noWrap
+            component={Link}
+            to="/"
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
               fontFamily: "monospace",
               fontWeight: 700,
               letterSpacing: ".3rem",
-              color: "inherit",
+              color: "black",
               textDecoration: "none",
             }}
           >
-            <Link
-              to={`/`}
-              style={{
-                textDecoration: "none",
-                color: "white",
-              }}
-            >
-              Doctors Portal
-            </Link>
+            Doctors Portal
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -99,7 +110,7 @@ function HeaderNav() {
               aria-controls="menu-appbar"
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
-              color="inherit"
+              color="accent"
             >
               <MenuIcon />
             </IconButton>
@@ -122,19 +133,18 @@ function HeaderNav() {
               }}
             >
               {pages.map(({ path, title }) => (
-                <MenuItem key={path} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">
-                    <NavLink
-                      to={`/${path}`}
-                      style={{
-                        textDecoration: "none",
-                        color: "black",
-                      }}
-                    >
-                      {title}
-                    </NavLink>
-                  </Typography>
-                </MenuItem>
+                <NavLink
+                  key={path}
+                  to={`/${path}`}
+                  style={{
+                    textDecoration: "none",
+                    color: "black",
+                  }}
+                >
+                  <MenuItem onClick={handleCloseNavMenu}>
+                    <Typography textAlign="center">{title}</Typography>
+                  </MenuItem>
+                </NavLink>
               ))}
             </Menu>
           </Box>
@@ -147,8 +157,8 @@ function HeaderNav() {
               flexGrow: 1,
               fontFamily: "monospace",
               fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "inherit",
+              letterSpacing: ".1rem",
+              color: "black",
               textDecoration: "none",
             }}
           >
@@ -156,7 +166,7 @@ function HeaderNav() {
               to={`/`}
               style={{
                 textDecoration: "none",
-                color: "white",
+                color: "black",
               }}
             >
               Doctors Portal
@@ -170,53 +180,80 @@ function HeaderNav() {
             }}
           >
             {pages.map(({ path, title }) => (
-              <Button
+              <NavLink
                 key={path}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}
+                style={{ textDecoration: "none", color: "black" }}
+                to={`/${path}`}
               >
-                <NavLink
-                  style={{ textDecoration: "none", color: "white" }}
-                  to={`/${path}`}
+                <Button
+                  onClick={handleCloseNavMenu}
+                  sx={{ my: 2, color: "black", display: "block" }}
                 >
                   {title}
-                </NavLink>
-              </Button>
+                </Button>
+              </NavLink>
             ))}
           </Box>
 
-          <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+          {user?.uid ? (
+            <Box sx={{ flexGrow: 0 }}>
+              <Tooltip title="Open settings">
+                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                  <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                </IconButton>
+              </Tooltip>
+              <IconButton
+                color="inherit"
+                aria-label="open drawer"
+                edge="start"
+                onClick={handleDrawerToggle}
+                sx={{ mr: 2, ml: 2, display: { md: "none" } }}
+              >
+                <MenuIcon />
               </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: "45px" }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
+              <Menu
+                sx={{ mt: "45px" }}
+                id="menu-appbar"
+                anchorEl={anchorElUser}
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                open={Boolean(anchorElUser)}
+                onClose={() => handleCloseUserMenu()}
+              >
+                {settings.map(({ value, handler, link }) => (
+                  <MenuItem
+                    key={value}
+                    onClick={() => handleCloseUserMenu(handler, link)}
+                  >
+                    <Typography textAlign="center">{value}</Typography>
+                  </MenuItem>
+                ))}
+              </Menu>
+            </Box>
+          ) : (
+            <NavLink
+              key="login"
+              style={{ textDecoration: "none", color: "black" }}
+              to="/login"
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
+              <Button
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: "black", display: "block" }}
+              >
+                Login
+              </Button>
+            </NavLink>
+          )}
         </Toolbar>
       </Container>
     </AppBar>
   );
-}
+};
 export default HeaderNav;

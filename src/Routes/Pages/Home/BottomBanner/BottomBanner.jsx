@@ -3,8 +3,27 @@ import treatment from "../../../../assets/images/treatment.png";
 
 const BottomBanner = () => {
   return (
-    <Grid container spacing={{ md: 5, xs: 1 }} my={20} maxWidth="md" mx="auto">
-      <Grid item xs={12} md={6}>
+    <Grid
+      container
+      spacing={{ md: 5, xs: 0 }}
+      maxWidth="md"
+      my={20}
+      mx={{
+        xs: "0",
+        md: "auto",
+      }}
+    >
+      <Grid
+        item
+        xs={12}
+        md={6}
+        sx={{
+          padding: {
+            xs: "70px",
+            md: "20px",
+          },
+        }}
+      >
         <img
           src={treatment}
           style={{
@@ -23,10 +42,17 @@ const BottomBanner = () => {
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
-          color: "accent.main",
+          color: "accent",
+          padding: {
+            xs: "70px",
+            md: "20px",
+          },
         }}
       >
-        <Box padding="20px">
+        <Box
+          sx={{
+          }}
+        >
           <Typography
             variant="h3"
             component="h1"
@@ -37,19 +63,20 @@ const BottomBanner = () => {
             Your New Smile Starts Here
           </Typography>
           <Typography
-            as="p"
+            component="p"
             sx={{
-              marginTop: "10px",
+              marginTop: 2,
+              fontSize: 14,
+              paddingRight: 3
             }}
           >
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam
-            architecto, animi recusandae suscipit quaerat ab.
+            It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsumis that it has a more-or-less normal distribution of letters,as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page
           </Typography>
           <Button
             disableElevation
             sx={{
               color: "white",
-              marginTop: "15px",
+              marginTop: 2,
             }}
             color="primary"
             variant="contained"

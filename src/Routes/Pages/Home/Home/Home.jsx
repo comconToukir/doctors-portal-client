@@ -3,7 +3,7 @@ import Banner from '../Banner/Banner';
 import ThreeIcons from '../ThreeIcons/ThreeIcons';
 import ThreeServices from '../ThreeServices/ThreeServices';
 import BottomBanner from '../BottomBanner/BottomBanner';
-import MakeAppoinment from './../MakeAppoinment/MakeAppoinment';
+import MakeAppointment from './../MakeAppointment/MakeAppointment';
 
 const Home = () => {
   return (
@@ -12,7 +12,7 @@ const Home = () => {
       <ThreeIcons />
       <ThreeServices />
       <BottomBanner />
-      <MakeAppoinment />
+      <MakeAppointment />
     </div>
   );
 };

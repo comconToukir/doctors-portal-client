@@ -10,6 +10,8 @@ import Register from "../Pages/Register/Register";
 import Main from "./../../Layout/Main";
 import PrivateRoute from "./PrivateRoute/PrivateRoute";
 import AdminRoute from "./AdminRoute/AdminRoute";
+import AddDoctor from "../Pages/Dashboard/AddDoctor/AddDoctor";
+import ManageDoctors from "./../Pages/Dashboard/ManageDoctors/ManageDoctors";
 
 const router = createBrowserRouter([
   {
@@ -51,6 +53,22 @@ const router = createBrowserRouter([
         element: (
           <AdminRoute>
             <AllUsers />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "/dashboard/add-doctor",
+        element: (
+          <AdminRoute>
+            <AddDoctor />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "/dashboard/manage-doctors",
+        element: (
+          <AdminRoute>
+            <ManageDoctors />
           </AdminRoute>
         ),
       },

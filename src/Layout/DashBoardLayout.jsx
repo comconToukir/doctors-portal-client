@@ -24,9 +24,7 @@ const drawerWidth = 240;
 const DashBoardLayout = () => {
   const { user } = useContext(UserContext);
 
-  const [ isAdmin ] = useCheckAdmin(user?.email);
-
-  console.log(isAdmin);
+  const [isAdmin] = useCheckAdmin(user?.email);
 
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -50,6 +48,14 @@ const DashBoardLayout = () => {
       {
         path: "/dashboard/all-users",
         text: "All Users",
+      },
+      {
+        path: "/dashboard/add-doctor",
+        text: "Add a doctor",
+      },
+      {
+        path: "/dashboard/manage-doctors",
+        text: "Manage Doctors",
       },
     ];
   }

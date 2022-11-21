@@ -31,7 +31,7 @@ const ManageDoctors = () => {
     queryKey: ["doctors"],
     queryFn: async () => {
       try {
-        const res = await fetch("http://localhost:5000/doctors", {
+        const res = await fetch("https://doctors-portal-server-flax-eta.vercel.app/doctors", {
           headers: {
             authorization: `Bearer ${localStorage.getItem("accessToken")}`,
           },
@@ -88,7 +88,7 @@ const ManageDoctors = () => {
       getActions: (params) => [
         <GridActionsCellItem
           icon={
-            <Tooltip title="Edit" placement="bottom-end">
+            <Tooltip title="Edit" placement="left-end">
               <EditIcon />
             </Tooltip>
           }
@@ -98,7 +98,7 @@ const ManageDoctors = () => {
         />,
         <GridActionsCellItem
           icon={
-            <Tooltip title="Delete" placement="bottom-start">
+            <Tooltip title="Delete" placement="right-end">
               <DeleteIcon />
             </Tooltip>
           }
@@ -120,7 +120,7 @@ const ManageDoctors = () => {
       <Typography component="h1" variant="h4" mb={2}>
         Manage Doctors: {doctors?.length}
       </Typography>
-      <Box style={{ height: 800, width: "100%", paddingRight: "40px" }}>
+      <Box style={{ height: 800, width: "100%"}}>
         <DataGrid
           autoHeight 
           getRowId={(row) => row._id}

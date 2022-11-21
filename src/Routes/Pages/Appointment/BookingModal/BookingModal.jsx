@@ -57,7 +57,7 @@ const BookingModal = ({
     };
 
     // console.log(bookingData);
-    fetch("http://localhost:5000/bookings", {
+    fetch("https://doctors-portal-server-flax-eta.vercel.app/bookings", {
       method: "POST",
       headers: {
         "content-type": "application/json",

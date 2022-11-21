@@ -17,7 +17,7 @@ const AddDoctor = () => {
   const { data: specialtyOptions = [], isLoading } = useQuery({
     queryKey: ["specialtyOptions"],
     queryFn: () =>
-      fetch(`http://localhost:5000/specialtyOptions`).then((res) => res.json()),
+      fetch(`https://doctors-portal-server-flax-eta.vercel.app/specialtyOptions`).then((res) => res.json()),
   });
 
   // console.log(specialtyOptions);
@@ -51,7 +51,7 @@ const AddDoctor = () => {
           };
 
           // save doctor information to database
-          fetch("http://localhost:5000/doctors", {
+          fetch("https://doctors-portal-server-flax-eta.vercel.app/doctors", {
             method: "POST",
             headers: {
               "content-type": "application/json",

@@ -56,7 +56,7 @@ const router = createBrowserRouter([
         path: "/dashboard/payment/:bookingId",
         element: <PaymentPage />,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/bookings/${params.bookingId}`),
+          fetch(`https://doctors-portal-server-flax-eta.vercel.app/bookings/${params.bookingId}`),
       },
       {
         path: "/dashboard/all-users",

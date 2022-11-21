@@ -100,8 +100,17 @@ const DashBoardLayout = () => {
             <CssBaseline />
             <Box
               component="nav"
-              sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
-              aria-label="mailbox folders"
+              sx={{
+                
+                width: {
+                  // md: drawerWidth,
+                },
+                flexShrink: {
+                  sm: 0,
+                  xl: 1
+                },
+              }}
+              aria-label="dashboard drawers"
             >
               {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
               <Drawer
@@ -125,6 +134,8 @@ const DashBoardLayout = () => {
                 variant="permanent"
                 sx={{
                   display: { xs: "none", md: "block" },
+                  height: "100%",
+                  backgroundColor: "yellow",
                   "& .MuiDrawer-paper": {
                     boxSizing: "border-box",
                     width: drawerWidth,
@@ -137,13 +148,16 @@ const DashBoardLayout = () => {
             </Box>
             <Box
               component="main"
-              position="fixed"
+              // position="fixed"
               sx={{
                 flexGrow: 1,
                 p: 1,
                 width: { md: `calc(100% - ${drawerWidth}px)`, xs: "100%" },
+                // width: { md: `100%`, xs: "100%" },
+
                 marginLeft: {
                   md: `${drawerWidth}px`,
+                  // xl: 6,
                 },
               }}
             >

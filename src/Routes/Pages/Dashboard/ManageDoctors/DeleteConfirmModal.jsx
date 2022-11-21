@@ -9,7 +9,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 
 const DeleteConfirmModal = ({ open, handleClose, refetch, deletingDoctor }) => {
   const deleteDoctor = () => {
-    fetch(`http://localhost:5000/doctors/${deletingDoctor._id}`, {
+    fetch(`https://doctors-portal-server-flax-eta.vercel.app/doctors/${deletingDoctor._id}`, {
       method: "DELETE",
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,

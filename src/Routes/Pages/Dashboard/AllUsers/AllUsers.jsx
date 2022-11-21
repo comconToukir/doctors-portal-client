@@ -14,7 +14,7 @@ const AllUsers = () => {
   const { data: users = [], isLoading, refetch } = useQuery({
     queryKey: ['all-users'],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/users`, {
+      const res = await fetch(`https://doctors-portal-server-flax-eta.vercel.app/users`, {
         method: 'GET',
         headers: {
           authorization: `Bearer ${localStorage.getItem("accessToken")}`
@@ -30,7 +30,7 @@ const AllUsers = () => {
   }
   
   const toggleAdmin = (id) => {
-    fetch(`http://localhost:5000/users/admin/${id}`, {
+    fetch(`https://doctors-portal-server-flax-eta.vercel.app/users/admin/${id}`, {
       method: 'PUT',
       headers: {
         authorization: `Bearer ${localStorage.getItem('accessToken')}`
@@ -88,10 +88,11 @@ const AllUsers = () => {
   return (
     <div>
       <Typography component="h1" variant="h4" mb={2}>
-        My Appointments
+        All Users
       </Typography>
-      <Box sx={{ height: 800, width: '100%', paddingRight: "25px" }}>
+      <Box sx={{ height: 800, width: '100%' }}>
       <DataGrid
+        autoHeight 
         getRowId={(row) => row._id}
         rows={users}
         columns={columns}

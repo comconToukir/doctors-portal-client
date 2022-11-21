@@ -76,7 +76,7 @@ const columns = [
     width: 25,
     renderCell: (params) => [
       params.row?.price && !params.row?.isPaid ? (
-        <Tooltip title="Pay" key={params.id + "pay"} placement="bottom-end">
+        <Tooltip title="Pay" key={params.id + "pay"} placement="right-end">
           <Link
             to={`/dashboard/payment/${params.id}`}
             style={{ color: "darkgreen" }}
@@ -113,7 +113,7 @@ const columns = [
 const MyAppointments = () => {
   const { user } = useContext(UserContext);
 
-  const url = `http://localhost:5000/bookings?email=${user?.email}`;
+  const url = `https://doctors-portal-server-flax-eta.vercel.app/bookings?email=${user?.email}`;
 
   const { data: bookings, isLoading } = useQuery({
     queryKey: ["bookings", user?.email],
@@ -134,8 +134,9 @@ const MyAppointments = () => {
       <Typography component="h1" variant="h4" mb={2}>
         My Appointments
       </Typography>
-      <Box sx={{ height: 635, width: "100%", paddingRight: "25px" }}>
+      <Box sx={{ height: 635, width: "100%"}}>
         <DataGrid
+          autoHeight 
           getRowId={(row) => row._id}
           rows={bookings}
           columns={columns}

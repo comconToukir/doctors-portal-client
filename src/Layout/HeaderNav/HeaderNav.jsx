@@ -202,15 +202,17 @@ const HeaderNav = ({ handleDrawerToggle }) => {
                   <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
                 </IconButton>
               </Tooltip>
-              <IconButton
-                color="inherit"
-                aria-label="open drawer"
-                edge="start"
-                onClick={handleDrawerToggle}
-                sx={{ mr: 2, ml: 2, display: { md: "none" } }}
-              >
-                <MenuIcon />
-              </IconButton>
+              {handleDrawerToggle ? (
+                <IconButton
+                  color="inherit"
+                  aria-label="open drawer"
+                  edge="start"
+                  onClick={handleDrawerToggle}
+                  sx={{ mr: 2, ml: 2, display: { md: "none" } }}
+                >
+                  <MenuIcon />
+                </IconButton>
+              ) : null}
               <Menu
                 sx={{ mt: "45px" }}
                 id="menu-appbar"

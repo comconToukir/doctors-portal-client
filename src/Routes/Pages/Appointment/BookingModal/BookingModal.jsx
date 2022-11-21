@@ -28,7 +28,7 @@ const BookingModal = ({
   selectedDate,
   refetch
 }) => {
-  const { name, slots } = treatment;
+  const { name, slots, price } = treatment;
   const [slot, setSlot] = useState("");
 
   const { user } = useContext(UserContext);
@@ -53,6 +53,7 @@ const BookingModal = ({
       timeSlot: selectedSlot,
       email: user?.email,
       phone,
+      price
     };
 
     // console.log(bookingData);
@@ -60,6 +61,7 @@ const BookingModal = ({
       method: "POST",
       headers: {
         "content-type": "application/json",
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`
       },
       body: JSON.stringify(bookingData),
     })

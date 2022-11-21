@@ -7,7 +7,7 @@ import Typography from "@mui/material/Typography";
 import { Grid } from "@mui/material";
 
 const AppointmentOptions = ({
-  option: { name, slots },
+  option: { name, slots , price },
   option,
   handleOpen,
   setTreatment,
@@ -36,6 +36,9 @@ const AppointmentOptions = ({
             {slots.length > 0 ? slots[0] : "Not available today"}
             <br />
             {slots.length} {slots.length > 1 ? "spaces" : "space"} available
+          </Typography>
+          <Typography component="span" variant="subtitle2">
+            ${price}
           </Typography>
         </CardContent>
         <CardActions>

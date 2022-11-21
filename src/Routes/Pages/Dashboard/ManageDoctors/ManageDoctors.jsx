@@ -120,13 +120,17 @@ const ManageDoctors = () => {
       <Typography component="h1" variant="h4" mb={2}>
         Manage Doctors: {doctors?.length}
       </Typography>
-      <Box sx={{ height: 800, width: "100%", paddingRight: "25px" }}>
+      <Box style={{ height: 800, width: "100%", paddingRight: "40px" }}>
         <DataGrid
+          autoHeight 
           getRowId={(row) => row._id}
           rows={doctors}
           columns={columns}
+          // getRowHeight={() => 'auto'}
+          rowHeight={75}
           pageSize={10}
-          rowsPerPageOptions={[10]}
+          rowsPerPageOptions={[5, 10, 15, 20]}
+          pagination
           checkboxSelection
           disableSelectionOnClick
           experimentalFeatures={{ newEditingApi: true }}
